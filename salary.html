@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAE &amp; Kuwait Salary to INR Savings Calculator (India CTC Equivalent) | GCC Expat Calculator</title>
+<meta name="description" content="See how much of a UAE or Kuwait salary you can really save in rupees after rent, food and transport, and what India salary would give you the same savings.">
+<meta property="og:title" content="UAE & Kuwait Salary and Savings Calculator">
+<meta property="og:description" content="Monthly savings in AED, KWD and INR, plus the India salary that matches it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gcc-expat-tools.pages.dev/salary">
+<link rel="canonical" href="https://gcc-expat-tools.pages.dev/salary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230b6e69%27/%3E%3Cpath d=%27M9 10h14M9 16h14M9 22h8%27 stroke=%27white%27 stroke-width=%272.6%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is salary taxed in the UAE or Kuwait?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Neither the UAE nor Kuwait charges personal income tax on salaries, so your take-home pay is your full salary. Indian citizens who become non-resident for tax purposes generally do not pay Indian tax on that foreign salary either."}},
+    {"@type": "Question", "name": "How do I compare a Gulf salary with an Indian CTC?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Compare savings, not salary. Subtract rent, food, transport and other costs from the Gulf salary and convert what is left to rupees. Then work out what India salary, after income tax and Indian living costs, would leave you the same amount."}},
+    {"@type": "Question", "name": "Is AED 8,000 a good salary in Dubai?",
+     "acceptedAnswer": {"@type": "Answer", "text": "It depends mainly on housing. With employer-provided accommodation or a shared room, most of AED 8,000 can be saved. With a studio or one-bedroom flat paid from your own pocket, rent alone can take half of it."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">GCC Expat <span>Calculator</span></a>
+    <nav class="tabs" aria-label="Calculators">
+      <a href="gratuity">Gratuity</a>
+      <a href="visa-fine">Visa fine</a>
+      <a href="salary" aria-current="page">Salary &amp; savings</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>UAE and Kuwait salary and savings calculator</h1>
+    <p>Check what a Gulf job offer is really worth: your monthly savings in rupees after living costs, and the India salary that would leave you the same amount.</p>
+  </section>
+
+  <form class="card" id="salary-form">
+    <div class="grid">
+      <fieldset>
+        <legend>Country</legend>
+        <div class="seg">
+          <label><input type="radio" name="country" value="uae" checked><span>UAE</span></label>
+          <label><input type="radio" name="country" value="kuwait"><span>Kuwait</span></label>
+        </div>
+      </fieldset>
+
+      <div class="grid two">
+        <div>
+          <label for="salary">Monthly salary (<span data-cur>AED</span>)</label>
+          <input type="number" id="salary" inputmode="decimal" min="0" step="any" value="8000">
+        </div>
+        <div>
+          <label for="home">Housing type</label>
+          <select id="home">
+            <option value="shared">Shared room / bed space</option>
+            <option value="studio" selected>Studio</option>
+            <option value="onebr">1-bedroom flat</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <label class="check"><input type="checkbox" id="housing-paid"> Employer provides housing</label>
+        <label class="check"><input type="checkbox" id="transport-paid"> Employer provides transport</label>
+      </div>
+
+      <fieldset>
+        <legend>Monthly costs in <span data-cur>AED</span> <span class="hint">Starting estimates only. Change them to match your city and lifestyle.</span></legend>
+        <div class="grid three">
+          <div><label for="rent">Rent</label><input type="number" id="rent" inputmode="decimal" min="0" step="any"></div>
+          <div><label for="food">Food</label><input type="number" id="food" inputmode="decimal" min="0" step="any"></div>
+          <div><label for="transport">Transport</label><input type="number" id="transport" inputmode="decimal" min="0" step="any"></div>
+          <div><label for="bills">Bills and phone</label><input type="number" id="bills" inputmode="decimal" min="0" step="any"></div>
+          <div><label for="other">Other</label><input type="number" id="other" inputmode="decimal" min="0" step="any"></div>
+          <div><label for="india-cost">India living cost (₹)</label><input type="number" id="india-cost" inputmode="decimal" min="0" step="any" value="35000"></div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div class="label">Estimated monthly savings</div>
+      <div class="big" id="out-amount">—</div>
+      <div class="sub" id="out-inr"></div>
+      <ul class="rows" id="out-rows"></ul>
+      <p class="note" id="out-note" hidden></p>
+      <div class="rate" id="rate">
+        <label for="rate-input" id="rate-label" style="margin:0">1 AED =</label>
+        <input type="number" id="rate-input" inputmode="decimal" min="0" step="any">
+        <span id="rate-src">INR</span>
+      </div>
+    </div>
+  </form>
+
+  <p class="warn">The living costs are rough starting points, not survey data. Rent varies a lot between Dubai, Abu Dhabi, Sharjah and Kuwait City, and between areas of the same city. Enter your own numbers for a result you can trust.</p>
+
+  <article class="guide">
+    <h2>How the savings figure is worked out</h2>
+    <p>The UAE and Kuwait do not tax salaries, so the calculation is simple: salary minus monthly costs. What is left is converted to rupees at the rate shown, which you can edit.</p>
+    <p>If the employer provides housing or transport, tick the box and that cost is removed. Many Gulf offers quote a single figure that already includes a housing allowance, so check your offer letter before ticking it.</p>
+
+    <h2>How the India comparison works</h2>
+    <p>A Gulf salary and an Indian CTC cannot be compared directly, because one is tax-free with high rent and the other is taxed with lower costs. This calculator compares what you keep.</p>
+    <ul>
+      <li>It takes your Gulf savings in rupees.</li>
+      <li>It adds your monthly living cost in India to get the in-hand pay you would need there.</li>
+      <li>It adds Indian income tax using the FY 2025-26 new-regime slabs, with the ₹75,000 standard deduction and 4% cess.</li>
+    </ul>
+    <p>The result is a gross salary. A CTC on an Indian offer letter is usually a little higher, because it also counts employer PF and gratuity.</p>
+
+    <h2>Costs people forget</h2>
+    <ul>
+      <li>Visa, medical and Emirates ID or civil ID costs if the employer does not cover them.</li>
+      <li>Flights home, and whether the contract includes an annual ticket.</li>
+      <li>Rent deposits and agency fees when you first arrive.</li>
+      <li>Money transfer fees and the exchange-rate margin on remittances.</li>
+      <li>School fees, if family will join you.</li>
+    </ul>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>GCC Expat Calculator gives estimates for general information only. It is not legal, immigration or financial advice, and it is not affiliated with any government body.</p>
+    <p>Rules last reviewed November 2026. Calculations run in your browser; nothing you type is stored or sent.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

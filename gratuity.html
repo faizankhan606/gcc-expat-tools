@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAE Gratuity &amp; Kuwait Indemnity Calculator (End of Service) | GCC Expat Calculator</title>
+<meta name="description" content="Calculate your UAE end-of-service gratuity or Kuwait indemnity in seconds. Covers the 21/30-day UAE rule, Kuwait Article 51 and 53 resignation shares, the legal caps, and the INR value.">
+<meta property="og:title" content="UAE Gratuity & Kuwait Indemnity Calculator">
+<meta property="og:description" content="End-of-service benefit for UAE and Kuwait private-sector workers, with the INR equivalent.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gcc-expat-tools.pages.dev/gratuity">
+<link rel="canonical" href="https://gcc-expat-tools.pages.dev/gratuity">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230b6e69%27/%3E%3Cpath d=%27M9 10h14M9 16h14M9 22h8%27 stroke=%27white%27 stroke-width=%272.6%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How is gratuity calculated in the UAE?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Under Federal Decree-Law 33 of 2021, a full-time private-sector employee earns 21 days of basic wage for each of the first five years of service and 30 days of basic wage for each year after that. The daily wage is the basic monthly salary divided by 30, at least one year of service is required, and the total cannot exceed two years of wage."}},
+    {"@type": "Question", "name": "Do I get full gratuity in the UAE if I resign?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes. The current UAE labour law removed the old reductions for resignation, so an employee who resigns after completing at least one year of service receives the same 21 and 30 day rates as one whose contract is terminated."}},
+    {"@type": "Question", "name": "How is end-of-service indemnity calculated in Kuwait?",
+     "acceptedAnswer": {"@type": "Answer", "text": "For monthly-paid private-sector workers, Article 51 of Kuwait Labour Law 6 of 2010 gives 15 days of wage for each of the first five years and one month of wage for each year after that, capped at one and a half years of wage. The daily wage is usually taken as the monthly wage divided by 26."}},
+    {"@type": "Question", "name": "How much indemnity do I get in Kuwait if I resign?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Under Article 53, a worker on an indefinite contract who resigns gets nothing before three years of service, half of the indemnity between three and five years, two-thirds between five and ten years, and the full amount after ten years."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">GCC Expat <span>Calculator</span></a>
+    <nav class="tabs" aria-label="Calculators">
+      <a href="gratuity" aria-current="page">Gratuity</a>
+      <a href="visa-fine">Visa fine</a>
+      <a href="salary">Salary &amp; savings</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>UAE gratuity and Kuwait indemnity calculator</h1>
+    <p>Work out the end-of-service money your employer owes you when you leave a private-sector job in the UAE or Kuwait, in local currency and in rupees.</p>
+  </section>
+
+  <form class="card" id="gratuity-form">
+    <div class="grid">
+      <fieldset>
+        <legend>Country</legend>
+        <div class="seg">
+          <label><input type="radio" name="country" value="uae" checked><span>UAE</span></label>
+          <label><input type="radio" name="country" value="kuwait"><span>Kuwait</span></label>
+        </div>
+      </fieldset>
+
+      <div>
+        <label id="salary-label" for="salary">Basic monthly salary (AED) <span class="hint" id="salary-hint">Basic salary only — housing, transport and other allowances are excluded.</span></label>
+        <input type="number" id="salary" inputmode="decimal" min="0" step="any" value="5000">
+      </div>
+
+      <div class="grid two">
+        <div>
+          <label for="years">Years of service</label>
+          <input type="number" id="years" inputmode="numeric" min="0" step="1" value="4">
+        </div>
+        <div>
+          <label for="months">Extra months</label>
+          <input type="number" id="months" inputmode="numeric" min="0" max="11" step="1" value="0">
+        </div>
+      </div>
+
+      <fieldset id="reason-field" hidden>
+        <legend>How the job ended</legend>
+        <div class="seg">
+          <label><input type="radio" name="reason" value="ended" checked><span>Terminated or contract ended</span></label>
+          <label><input type="radio" name="reason" value="resigned"><span>I resigned</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div class="label">Estimated end-of-service benefit</div>
+      <div class="big" id="out-amount">—</div>
+      <div class="sub" id="out-inr"></div>
+      <ul class="rows" id="out-rows"></ul>
+      <p class="note" id="out-note" hidden></p>
+      <div class="rate" id="rate">
+        <label for="rate-input" id="rate-label" style="margin:0">1 AED =</label>
+        <input type="number" id="rate-input" inputmode="decimal" min="0" step="any">
+        <span id="rate-src">INR</span>
+      </div>
+    </div>
+  </form>
+
+  <p class="warn">This is an estimate for full-time private-sector employees. Unpaid leave, free-zone rules (DIFC and ADGM have their own schemes), part-time contracts and company policies can change the final figure. Check your contract and the official ministry before relying on it.</p>
+
+  <article class="guide">
+    <h2>How UAE gratuity is calculated</h2>
+    <p>The UAE rules come from Federal Decree-Law No. 33 of 2021, which has applied to private-sector jobs since February 2022.</p>
+    <ul>
+      <li>You need at least <strong>one full year</strong> of continuous service.</li>
+      <li>You earn <strong>21 days</strong> of basic wage for each of the first five years.</li>
+      <li>You earn <strong>30 days</strong> of basic wage for each year after five.</li>
+      <li>Part of a year counts in proportion, once you have passed the first year.</li>
+      <li>The daily wage is your last basic monthly salary divided by 30.</li>
+      <li>The total cannot be more than <strong>two years</strong> of wage.</li>
+      <li>Days of unpaid leave are not counted as service.</li>
+    </ul>
+    <p>Resigning no longer reduces the amount. The old law cut gratuity for people who resigned early; the current law pays the same rates whether you resign or are let go.</p>
+    <h3>Example</h3>
+    <p>Basic salary AED 5,000, service 7 years. Daily wage is 5,000 ÷ 30 = AED 166.67. First five years: 5 × 21 × 166.67 = AED 17,500. Next two years: 2 × 30 × 166.67 = AED 10,000. Total gratuity: AED 27,500.</p>
+
+    <h2>How Kuwait indemnity is calculated</h2>
+    <p>Kuwait's rules are in Labour Law No. 6 of 2010, Articles 51 and 53. This calculator covers monthly-paid workers, which is how most expat employees are paid.</p>
+    <ul>
+      <li>You earn <strong>15 days</strong> of wage for each of the first five years.</li>
+      <li>You earn <strong>one month</strong> of wage for each year after five.</li>
+      <li>The calculation uses your last full wage, including regular allowances, not only the basic.</li>
+      <li>The daily wage is normally the monthly wage divided by 26 working days.</li>
+      <li>The total cannot be more than <strong>one and a half years</strong> of wage.</li>
+    </ul>
+    <h3>If you resign in Kuwait</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Service completed</th><th>Share of indemnity</th></tr></thead>
+        <tbody>
+          <tr><td>Less than 3 years</td><td>None</td></tr>
+          <tr><td>3 to under 5 years</td><td>Half</td></tr>
+          <tr><td>5 to under 10 years</td><td>Two-thirds</td></tr>
+          <tr><td>10 years or more</td><td>Full</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>If the employer ends the contract, or a fixed-term contract runs out, the full amount is due.</p>
+
+    <h2>Official sources</h2>
+    <ul>
+      <li><a href="https://www.mohre.gov.ae/" rel="noopener">UAE Ministry of Human Resources and Emiratisation (MOHRE)</a></li>
+      <li><a href="https://uaelegislation.gov.ae/" rel="noopener">UAE Legislation portal — Federal Decree-Law 33 of 2021</a></li>
+      <li><a href="https://www.manpower.gov.kw/" rel="noopener">Kuwait Public Authority for Manpower (PAM)</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>GCC Expat Calculator gives estimates for general information only. It is not legal, immigration or financial advice, and it is not affiliated with any government body.</p>
+    <p>Rules last reviewed November 2026. Calculations run in your browser; nothing you type is stored or sent.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAE &amp; Kuwait Visa Overstay Fine Calculator | GCC Expat Calculator</title>
+<meta name="description" content="Calculate the overstay fine for a UAE or Kuwait visa from your expiry and exit dates. UAE AED 50 per day; Kuwait KWD 10 per day for visit visas and KWD 2 then KWD 4 for residence permits, with the legal maximums.">
+<meta property="og:title" content="UAE & Kuwait Visa Overstay Fine Calculator">
+<meta property="og:description" content="Enter your visa expiry and exit dates to see the overstay days and the fine.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gcc-expat-tools.pages.dev/visa-fine">
+<link rel="canonical" href="https://gcc-expat-tools.pages.dev/visa-fine">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230b6e69%27/%3E%3Cpath d=%27M9 10h14M9 16h14M9 22h8%27 stroke=%27white%27 stroke-width=%272.6%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How much is the overstay fine in the UAE?",
+     "acceptedAnswer": {"@type": "Answer", "text": "The UAE charges AED 50 for each day of overstay on tourist, visit and residence visas. Service fees charged when paying are extra."}},
+    {"@type": "Question", "name": "Is there a grace period after a UAE residence visa is cancelled?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Most residents get a grace period after their residence visa is cancelled or expires, commonly 30 days and longer for some categories, before fines start. Tourist and visit visas should be treated as having no grace period. Confirm your own category with ICP or GDRFA."}},
+    {"@type": "Question", "name": "How much is the overstay fine in Kuwait?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Under Kuwait's residency law in force since January 2025, overstaying a visit visa costs KWD 10 per day up to a maximum of KWD 2,000. Overstaying a residence permit costs KWD 2 per day for the first month and KWD 4 per day after that, up to KWD 1,200. For domestic workers it is KWD 2 per day up to KWD 600."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">GCC Expat <span>Calculator</span></a>
+    <nav class="tabs" aria-label="Calculators">
+      <a href="gratuity">Gratuity</a>
+      <a href="visa-fine" aria-current="page">Visa fine</a>
+      <a href="salary">Salary &amp; savings</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>UAE and Kuwait visa overstay fine calculator</h1>
+    <p>Enter the date your visa expired or was cancelled and the date you leave. You get the number of overstay days and the fine in local currency and rupees.</p>
+  </section>
+
+  <form class="card" id="visa-form">
+    <div class="grid">
+      <fieldset>
+        <legend>Country</legend>
+        <div class="seg">
+          <label><input type="radio" name="country" value="uae" checked><span>UAE</span></label>
+          <label><input type="radio" name="country" value="kuwait"><span>Kuwait</span></label>
+        </div>
+      </fieldset>
+
+      <div>
+        <label for="visa-type">Visa type</label>
+        <select id="visa-type"></select>
+      </div>
+
+      <div class="grid two">
+        <div>
+          <label for="expiry">Visa expiry or cancellation date</label>
+          <input type="date" id="expiry">
+        </div>
+        <div>
+          <label for="exit">Exit date (or today)</label>
+          <input type="date" id="exit">
+        </div>
+      </div>
+
+      <div id="grace-field">
+        <label for="grace">Grace period (days) <span class="hint">Usually 30 days after a residence visa ends; some categories get more. Use 0 for tourist and visit visas.</span></label>
+        <input type="number" id="grace" inputmode="numeric" min="0" step="1" value="30">
+      </div>
+    </div>
+
+    <div class="result" aria-live="polite">
+      <div class="label">Estimated overstay fine</div>
+      <div class="big" id="out-amount">—</div>
+      <div class="sub" id="out-inr"></div>
+      <ul class="rows" id="out-rows"></ul>
+      <p class="note" id="out-note" hidden></p>
+      <div class="rate" id="rate">
+        <label for="rate-input" id="rate-label" style="margin:0">1 AED =</label>
+        <input type="number" id="rate-input" inputmode="decimal" min="0" step="any">
+        <span id="rate-src">INR</span>
+      </div>
+    </div>
+  </form>
+
+  <p class="warn">Overstaying can also lead to a travel ban, deportation or a court case, not only a fine. The exact amount is set by the immigration authority when you pay. Use the official fine-check services below for your real figure.</p>
+
+  <article class="guide">
+    <h2>UAE overstay fines</h2>
+    <ul>
+      <li>The fine is <strong>AED 50 per day</strong> for tourist, visit and residence visas.</li>
+      <li>After a residence visa is cancelled or expires, most people get a grace period before fines start. Thirty days is the common figure; Golden and Green visa holders and some skilled categories get longer.</li>
+      <li>Treat tourist and visit visas as having <strong>no grace period</strong>. The fine starts the day after the visa ends.</li>
+      <li>Service and admin fees are added at payment.</li>
+    </ul>
+    <h3>Example</h3>
+    <p>A residence visa is cancelled on 1 March and the holder leaves on 20 April. That is 50 days after cancellation. With a 30-day grace period there are 20 overstay days, so the fine is 20 × AED 50 = AED 1,000.</p>
+
+    <h2>Kuwait overstay fines</h2>
+    <p>Kuwait's new residency law has applied since 5 January 2025 and raised the fines sharply.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Visa</th><th>Daily fine</th><th>Maximum</th></tr></thead>
+        <tbody>
+          <tr><td>Visit visa</td><td>KWD 10</td><td>KWD 2,000</td></tr>
+          <tr><td>Residence permit</td><td>KWD 2 for the first month, then KWD 4</td><td>KWD 1,200</td></tr>
+          <tr><td>Domestic worker residence</td><td>KWD 2</td><td>KWD 600</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Kuwait does not give a grace period on visit visas. One day late already counts as a violation.</p>
+
+    <h2>Official sources</h2>
+    <ul>
+      <li><a href="https://icp.gov.ae/" rel="noopener">UAE Federal Authority for Identity, Citizenship, Customs and Port Security (ICP)</a></li>
+      <li><a href="https://gdrfad.gov.ae/" rel="noopener">GDRFA Dubai</a></li>
+      <li><a href="https://www.moi.gov.kw/" rel="noopener">Kuwait Ministry of Interior</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>GCC Expat Calculator gives estimates for general information only. It is not legal, immigration or financial advice, and it is not affiliated with any government body.</p>
+    <p>Rules last reviewed November 2026. Calculations run in your browser; nothing you type is stored or sent.</p>
+  </div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

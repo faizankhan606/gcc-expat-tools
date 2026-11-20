@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gcc-expat-tools.pages.dev/sitemap.xml
